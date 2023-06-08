@@ -1,18 +1,13 @@
 #!/usr/bin/python3
+if __name__ == "__main__":
 import sys
-
-argv = sys.argv[1:]
-num_arguments = len(argv)
-
-if num_arguments == 0:
-    print("No arguments were passed.")
-else:
-    if num_arguments == 1:
-        argument_str = "argument"
+    total = len(sys.argv)
+    if total <= 1:
+        print("0 arguments.")
     else:
-        argument_str = "arguments"
-
-    print(f"Number of {argument_str}: {num_arguments}.")
-
-    for i, arg in enumerate(argv):
-        print(f"Argument {i+1}: {arg}")
+        if total == 2:
+            print(f"{total - 1} argument:")
+        else:
+            print(f"{total - 1} arguments:")
+        for i in range(1, total):
+            print(f"{i}: {sys.argv[i]}")
