@@ -1,30 +1,23 @@
 #!/usr/bin/python3
 def list_division(my_list_1, my_list_2, list_length):
-    result = []
-
+    store = []
+    switch = 0
     for i in range(list_length):
         try:
-            # Get the current elements from both lists
-            num1 = my_list_1[i]
-            num2 = my_list_2[i]
-
-            # Check if the elements are numeric
-            if not isinstance(num1, (int, float)) or not isinstance(num2, (int, float)):
-                print("wrong type")
-                result.append(0)
-                continue
-
-            # Perform the division
-            try:
-                division_result = num1 / num2
-            except ZeroDivisionError:
-                print("division by 0")
-                division_result = 0
-
-            result.append(division_result)
-
+            x = my_list_1[i] / my_list_2[i]
+        except ZeroDivisionError:
+            print("division by 0")
+            switch = 1
+        except TypeError:
+            print("wrong type")
+            switch = 1
         except IndexError:
             print("out of range")
-            result.append(0)
-
-    return result
+            switch = 1
+        finally:
+            if switch:
+                switch = 0
+                store.append(0)
+            else:
+                store.append(x)
+    return store
