@@ -7,6 +7,13 @@ This module provides a Rectangle class.
 
 
 class Rectangle:
+    """A Rectangle class with attributes width and height,
+    methods area, perimeter, print, str, repr, and del, and
+    class attribute number_of_instances that keeps track of # of instances,
+    class attribute print_symbol which is used as symbol for printing,
+    static method bigger_or_equal that returns biggest rectangle,
+    and class method square that returns a new Rectangle.
+    """
     number_of_instances = 0
     print_symbol = "#"
 
@@ -21,7 +28,7 @@ class Rectangle:
 
     @width.setter
     def width(self, value):
-        if not isinstance(value, int):
+        if type(value) is not int:
             raise TypeError("width must be an integer")
         if value < 0:
             raise ValueError("width must be >= 0")
@@ -33,32 +40,11 @@ class Rectangle:
 
     @height.setter
     def height(self, value):
-        if not isinstance(value, int):
+        if type(value) is not int:
             raise TypeError("height must be an integer")
         if value < 0:
             raise ValueError("height must be >= 0")
         self.__height = value
-
-    def area(self):
-        return self.width * self.height
-
-    def perimeter(self):
-        return 2 * (self.width + self.height)
-
-    def __str__(self):
-        if self.width == 0 or self.height == 0:
-            return ""
-        rectangle_str = ""
-        for _ in range(self.height):
-            rectangle_str += str(self.print_symbol) * self.width + "\n"
-        return rectangle_str[:-1]
-
-    def __repr__(self):
-        return "Rectangle({}, {})".format(self.width, self.height)
-
-    def __del__(self):
-        Rectangle.number_of_instances -= 1
-        print("Bye rectangle...")
 
     @staticmethod
     def bigger_or_equal(rect_1, rect_2):
@@ -73,4 +59,31 @@ class Rectangle:
 
     @classmethod
     def square(cls, size=0):
-        return cls(size, size)
+        return Rectangle(size, size)
+
+    def __repr__(self):
+        return "Rectangle({:d}, {:d})".format(self.__width, self.__height)
+
+    def __str__(self):
+        total = ""
+        for i in range(self.__height):
+            for j in range(self.__width):
+                try:
+                    total += str(self.print_symbol)
+                except Exception:
+                    total += type(self).print_symbol
+            if i is not self.__height - 1:
+                total += "\n"
+        return total
+
+    def __del__(self):
+        print("Bye rectangle...")
+        Rectangle.number_of_instances -= 1
+
+    def area(self):
+        return self.__width * self.__height
+
+    def perimeter(self):
+        if self.__width is 0 or self.__height is 0:
+            return 0
+        return (2 * self.__width) + (2 * self.__height)
