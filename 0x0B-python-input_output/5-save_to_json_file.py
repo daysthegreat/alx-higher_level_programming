@@ -1,11 +1,14 @@
 #!/usr/bin/python3
 """Defines a JSON file-writing function."""
-import json
 
 
 def save_to_json_file(my_obj, filename):
-    with open(filename, 'w') as file:
-        try:
-            json.dump(my_obj, file)
-        except TypeError:
-            pass
+    """Writes Python obj to file using JSON represenation
+    Args:
+        my_obj: python object
+        filename: file
+    """
+    import json
+
+    with open(filename, mode="w", encoding="utf-8") as f:
+        json.dump(my_obj, f)
