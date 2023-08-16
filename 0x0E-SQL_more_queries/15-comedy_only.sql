@@ -2,11 +2,9 @@
 -- 'tv_genres' table contains only one record where name = Comedy
 -- Results must be sorted in ascending order by the show title
 -- You can only use one SELECT statement
-USE hbtn_0d_tvshows;
-
 SELECT tv_shows.title
 FROM tv_shows
-JOIN shows_genres ON tv_shows.id = shows_genres.show_id
-JOIN tv_genres ON shows_genres.genre_id = tv_genres.id
-WHERE tv_genres.name = 'Comedy'
+INNER JOIN tv_show_genres m ON tv_shows.id = m.show_id
+INNER JOIN tv_genres g ON m.genre_id = g.id
+WHERE g.name = 'Comedy'
 ORDER BY tv_shows.title ASC;

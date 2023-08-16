@@ -2,13 +2,9 @@
 -- 'tv_genres' table contains only one record where name = Comedy
 -- Each record should display tv_shows.title
 -- You can use max of 2 SELECT statements
-SELECT s.title
-FROM tv_shows s
-WHERE s.title NOT IN (
-      SELECT s.title
-      FROM tv_shows s
-      INNER JOIN tv_show_genres m ON s.id = m.show_id
-      INNER JOIN tv_genres g ON m.genre_id = g.id
-      WHERE g.name = 'Comedy'
-)
-ORDER BY s.title ASC;
+SELECT tv_shows.title, SUM(tv_show_ratings.rate) AS 'rating'
+      FROM tv_shows
+INNER JOIN tv_show_ratings
+        ON tv_shows.id = tv_show_ratings.show_id
+  GROUP BY title
+  ORDER BY rating DESC;

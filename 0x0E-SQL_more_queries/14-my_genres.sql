@@ -3,11 +3,11 @@
 -- Each record should display tv_genres.name
 -- Results must be sorted in ascending order by genre name
 -- You can only use one SELECT statement
-USE hbtn_0d_tvshows;
-
 SELECT tv_genres.name
-FROM tv_genres
-JOIN shows_genres ON tv_genres.id = shows_genres.genre_id
-JOIN tv_shows ON shows_genres.show_id = tv_shows.id
-WHERE tv_shows.title = 'Dexter'
-ORDER BY tv_genres.name ASC;
+      FROM tv_genres
+INNER JOIN tv_show_genres
+        ON tv_genres.id = tv_show_genres.genre_id
+INNER JOIN tv_shows
+      ON tv_show_genres.show_id = tv_shows.id
+     WHERE tv_shows.title = "Dexter"
+  ORDER BY tv_genres.name ASC;
