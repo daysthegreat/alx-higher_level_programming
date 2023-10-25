@@ -1,6 +1,11 @@
 #!/usr/bin/node
+const myArray = process.argv.slice(2);
 const request = require('request');
-let url = 'http://swapi.co/api/films/' + process.argv[2];
-request(url, function (error, response, body) {
-  console.log(error || JSON.parse(body).title);
-});
+
+if (Number.isInteger(parseInt(myArray[0]))) {
+  const apiUrl = `https://swapi-api.alx-tools.com/api/films/${myArray[0]}`;
+  request(apiUrl, function (error, response, body) {
+    if (error) console.error('error:', error);
+    console.log(JSON.parse(body).title);
+  });
+}
